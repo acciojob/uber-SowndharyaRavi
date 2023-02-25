@@ -67,7 +67,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 		int ratePerKm=distanceInKm * driver.getCab().getPerKmRate();
 		tripBooking.setBill(ratePerKm);
-		tripBooking.setTripStatus(TripStatus.CONFIRMED);
+		tripBooking.setStatus(TripStatus.CONFIRMED);
 
 		driver.getCab().setAvailable(false);
 
@@ -85,7 +85,7 @@ public class CustomerServiceImpl implements CustomerService {
 		//Cancel the trip having given trip Id and update TripBooking attributes accordingly
 
 		TripBooking tripBooking =  tripBookingRepository2.findById(tripId).get();
-		tripBooking.setTripStatus(TripStatus.CANCELED);
+		tripBooking.setStatus(TripStatus.CANCELED);
 		tripBooking.setBill(0);
 		tripBooking.getDriver().getCab().setAvailable(true);
 
@@ -99,7 +99,7 @@ public class CustomerServiceImpl implements CustomerService {
 		//Complete the trip having given trip Id and update TripBooking attributes accordingly
         TripBooking tripBooking=tripBookingRepository2.findById(tripId).get();
 
-		tripBooking.setTripStatus(TripStatus.COMPLETED);
+		tripBooking.setStatus(TripStatus.COMPLETED);
 
 		int bill=tripBooking.getDistanceInKm() * tripBooking.getDriver().getCab().getPerKmRate();
 		tripBooking.setBill(bill);
